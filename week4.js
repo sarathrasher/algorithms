@@ -75,9 +75,13 @@ console.assert(capitalize("hello world") === "Hello World", "Capitalize a string
 // 50-55 = MasterCard
 
 var creditValidate = function(cardNumber) {
-    stringNum = cardNumber.toString();
-    return (stringNum.length === 16);
+  stringNum = cardNumber.toString();
 
+  if (stringNum.substring(0,2) === '37') {
+    return (stringNum.length === 15);
+  }
+
+  return (stringNum.length === 16);
 };
 
 
@@ -86,5 +90,8 @@ var creditValidate = function(cardNumber) {
 console.assert(creditValidate(123456789012345) === false, 'String must be 16 digits unless 37 or 34');
 console.assert(creditValidate(1234567890123456) === true, 'String must be 16 digits unless 37 or 34');
 
-console.assert(creditValidate(370000000000000) === true, "String must be 15 digits if starts with 37 or 34")
-console.assert(creditValidate(3700000000000000) === false, "String must not be 16 digits if starts with 37 or 34");
+console.assert(creditValidate(370000000000000) === true, "String must be 15 digits if starts with 37")
+console.assert(creditValidate(3700000000000000) === false, "String must not be 16 digits if starts with 37");
+
+console.assert(creditValidate(340000000000000) === true, "String must be 15 digits if starts with 34")
+console.assert(creditValidate(3400000000000000) === false, "String must not be 16 digits if starts with 34");
