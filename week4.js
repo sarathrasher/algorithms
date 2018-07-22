@@ -29,7 +29,7 @@ var caseConvert = function caseConvert(str, conversionType) {
     };
     if (conversionType === "snakecase") {
         var convertedStr = stringArray.join("_");
-    } else if (conversionType === "camelcase") { 
+    } else if (conversionType === "camelcase") {
         var convertedStr = ""
         convertedStr += stringArray[0];
         for (i = 1; i < stringArrayLength; i++) {
@@ -46,7 +46,7 @@ var caseConvert = function caseConvert(str, conversionType) {
 //SnakecaseAssertions
 console.assert(caseConvert("hello", "snakecase") === "hello", "string should be returned.");
 
-console.assert(caseConvert("goodbye", "snakecase") === "goodbye", "Return the input string"); 
+console.assert(caseConvert("goodbye", "snakecase") === "goodbye", "Return the input string");
 
 console.assert(caseConvert("HELLO", "snakecase") === "hello", "String must be lowercase");
 
@@ -74,3 +74,12 @@ console.assert(capitalize("hello world") === "Hello World", "Capitalize a string
 // 4 = Visa
 // 50-55 = MasterCard
 
+var creditValidate = function(cardNumber) {
+
+};
+
+
+//Assertions
+
+console.assert(creditValidate(123456789012345) === false, 'String must be 16 digits unless 37 or 34');
+console.assert(creditValidate(1234567890123456) === true, 'String must be 16 digits unless 37 or 34');
