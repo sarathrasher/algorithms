@@ -75,25 +75,31 @@ console.assert(capitalize("hello world") === "Hello World", "Capitalize a string
 // 50-55 = MasterCard
 
 var creditValidate = function(cardNumber) {
-  stringNum = cardNumber.toString();
+  var stringNum = cardNumber.toString();
+  var returnObject = {
+    valid: null
+  };
 
   if (stringNum.substring(0,2) === '37' || stringNum.substring(0,2) === '34') {
-    return (stringNum.length === 15);
+    returnObject.valid = (stringNum.length === 15);
+  } else {
+    returnObject.valid = (stringNum.length === 16);
   }
 
-  return (stringNum.length === 16);
+  return returnObject;
 };
 
 
 //Assertions
 
-console.assert(creditValidate(123456789012345) === {valid: false}, 'String must be 16 digits unless 37 or 34');
-console.assert(creditValidate(1234567890123456) === {valid: true}, 'String must be 16 digits unless 37 or 34');
+console.assert(creditValidate(123456789012345).valid === false, 'String must be 16 digits unless 37 or 34');
+console.assert(creditValidate(1234567890123456).valid === true, 'String must be 16 digits unless 37 or 34');
 
-console.assert(creditValidate(370000000000000) === {valid: true}, "String must be 15 digits if starts with 37")
-console.assert(creditValidate(3700000000000000) === {valid: false}, "String must not be 16 digits if starts with 37");
+console.assert(creditValidate(370000000000000).valid === true, "String must be 15 digits if starts with 37")
+console.assert(creditValidate(3700000000000000).valid === false, "String must not be 16 digits if starts with 37");
 
-console.assert(creditValidate(340000000000000) === {valid: true}, "String must be 15 digits if starts with 34")
-console.assert(creditValidate(3400000000000000) === {valid: false}, "String must not be 16 digits if starts with 34");
+console.assert(creditValidate(340000000000000).valid === true, "String must be 15 digits if starts with 34")
+console.assert(creditValidate(3400000000000000).valid === false, "String must not be 16 digits if starts with 34");
 
-
+console.assert(creditValidate(370000000000000).type === 'American Express', "37 should return type American Express");
+console.assert(creditValidate(340000000000000).type === 'American Express', "34 should return type American Express");
