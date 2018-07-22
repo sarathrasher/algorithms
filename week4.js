@@ -77,7 +77,8 @@ console.assert(capitalize("hello world") === "Hello World", "Capitalize a string
 var creditValidate = function(cardNumber) {
   var stringNum = cardNumber.toString();
   var returnObject = {
-    valid: null
+    valid: null,
+    type: null
   };
 
   if (stringNum.substring(0,2) === '37' || stringNum.substring(0,2) === '34') {
@@ -89,6 +90,10 @@ var creditValidate = function(cardNumber) {
 
   if (stringNum.substring(0,4) === '6011') {
     returnObject.type = "Discover";
+  }
+
+  if (stringNum.substring(0, 1) === '4') {
+    returnObject.type = "Visa";
   }
 
   return returnObject;
@@ -114,3 +119,9 @@ console.assert(creditValidate(340000000000000).type !== 'Dicover', '34 should no
 
 console.assert(creditValidate(4000000000000).type === 'Visa', '4 should return type Visa');
 console.assert(creditValidate(340000000000000).type !== 'Dicover', '34 should not return type Visa');
+
+console.assert(creditValidate(50).type === 'MasterCard', '50 should return type Mastercard');
+console.assert(creditValidate(34).type !== 'Mastercard', '34 should not return type Mastercard');
+
+console.assert(creditValidate(55).type === 'MasterCard', '55 should return type Mastercard');
+console.assert(creditValidate(34).type !== 'Mastercard', '34 should not return type Mastercard');
