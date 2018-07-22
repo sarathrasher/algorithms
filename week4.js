@@ -82,6 +82,7 @@ var creditValidate = function(cardNumber) {
 
   if (stringNum.substring(0,2) === '37' || stringNum.substring(0,2) === '34') {
     returnObject.valid = (stringNum.length === 15);
+    returnObject.type = "American Express";
   } else {
     returnObject.valid = (stringNum.length === 16);
   }
@@ -103,3 +104,6 @@ console.assert(creditValidate(3400000000000000).valid === false, "String must no
 
 console.assert(creditValidate(370000000000000).type === 'American Express', "37 should return type American Express");
 console.assert(creditValidate(340000000000000).type === 'American Express', "34 should return type American Express");
+
+console.assert(creditValidate(6011000000000000).type === 'Discover', '6011 should return type Discover');
+console.assert(creditValidate(340000000000000).type === 'Dicover', '6011 should return type Discover');
