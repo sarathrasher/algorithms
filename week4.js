@@ -81,7 +81,8 @@ var creditValidate = function(cardNumber) {
     type: null
   };
 
-  if (stringNum.substring(0,2) === '37' || stringNum.substring(0,2) === '34') {
+  var firstTwoCharacters = stringNum.substring(0,2);
+  if (firstTwoCharacters === '37' || firstTwoCharacters === '34') {
     returnObject.valid = (stringNum.length === 15);
     returnObject.type = "American Express";
   } else {
@@ -94,6 +95,10 @@ var creditValidate = function(cardNumber) {
 
   if (stringNum.substring(0, 1) === '4') {
     returnObject.type = "Visa";
+  }
+
+  if (parseInt(firstTwoCharacters) >= 50 && parseInt(firstTwoCharacters) <= 55) {
+    returnObject.type = 'MasterCard';
   }
 
   return returnObject;
@@ -118,10 +123,9 @@ console.assert(creditValidate(6011000000000000).type === 'Discover', '6011 shoul
 console.assert(creditValidate(340000000000000).type !== 'Dicover', '34 should not return type Discover');
 
 console.assert(creditValidate(4000000000000).type === 'Visa', '4 should return type Visa');
-console.assert(creditValidate(340000000000000).type !== 'Dicover', '34 should not return type Visa');
+console.assert(creditValidate(340000000000000).type !== 'Visa', '34 should not return type Visa');
 
 console.assert(creditValidate(50).type === 'MasterCard', '50 should return type Mastercard');
-console.assert(creditValidate(34).type !== 'Mastercard', '34 should not return type Mastercard');
-
+console.assert(creditValidate(52).type === 'MasterCard', '52 should return type Mastercard');
 console.assert(creditValidate(55).type === 'MasterCard', '55 should return type Mastercard');
 console.assert(creditValidate(34).type !== 'Mastercard', '34 should not return type Mastercard');
